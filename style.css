@@ -59,9 +59,41 @@
   }
   
   .food {
-    background: #8e44ad;
+    background: #262cae;
   }
   
   .snake {
-    background: #16a085;
+    background: #a01616;
+  }
+
+  /* bar showing status below table */
+.status {
+    background: white;
+    color: #a01616;
+    border: solid 1px #a01616;
+    width: 210px;
+    height: 20px;
+  }
+  @media only screen and (min-width: 768px) {
+    .status {
+      width: 315px;
+      height: 30px;
+    }
+  }
+  
+  .score {
+    float: right;
+    padding: 0 5px;
+    line-height: 20px;
+  }
+  @media only screen and (min-width: 768px) {
+    .score {
+      padding: 0 10px;
+      line-height: 30px;
+      font-size: 20px;
+    }
+  }
+  
+  .hidden {
+    display: none !important;
   }
