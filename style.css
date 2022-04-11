@@ -97,3 +97,52 @@
   .hidden {
     display: none !important;
   }
+
+  /* modular window before and after game */
+.modul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  .start {
+    background: rgba(256,256,256,1);
+    padding: 60px;
+    box-shadow: 0 0 2px 3px rgba(0,0,0,0.3);
+    border-radius: 2px;
+  }
+  .start span {
+    color: #a01616;
+    border: 1px solid;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .start span:hover {
+    background: #a01616;
+    color: white;
+  }
+  
+  footer {
+    padding: 5px;
+    color: white;
+    font-size: 14px;
+  }
+  
+  footer a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    color: white;
+    text-decoration: underline;
+  }
