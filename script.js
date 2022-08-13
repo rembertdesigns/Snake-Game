@@ -105,3 +105,24 @@ function startSnake() {
         console.log("no direction !");
     }
   }
+
+  // checks border contact
+function hitBorder() {
+    var headPos = snake.position.length-1;
+    // goes of limits
+    if (((snake.position[headPos][0] === table.rowsCols-1) && (snake.direction === "right")) || ((snake.position[headPos][0] === 0) && (snake.direction === "left")) || ((snake.position[headPos][1] === table.rowsCols-1) && (snake.direction === "down")) ||  ((snake.position[headPos][1] === 0) && (snake.direction === "up"))) {
+      // console.log("border hit");
+      stopp();
+    }
+  }
+  
+  // checks self contact
+  function hitSnake() {
+    var headPos = snake.position.length-1;
+    for (var i=0; i<headPos; i++) {
+      if (snake.position[headPos].toString() === snake.position[i].toString()) {
+        // console.log("snake hit");
+        stopp();
+      }
+    } 
+  }
