@@ -126,3 +126,106 @@ function hitBorder() {
       }
     } 
   }
+
+  // checks food contact
+function hitFood() {
+    var head = snake.position[snake.position.length-1];
+    var tail = snake.position[0];
+    if (head.toString() === foodPos.toString()) {
+      boxes[random].classList.remove("food");
+      snake.position.unshift(tail);
+      randomFood();
+      snake.food++;
+      snake.score += snake.food;
+      scoreElt.innerHTML = snake.score + " pts";
+      // increase speed
+      clearInterval(setInt);
+      snake.interval = snake.interval - snake.interval/40;
+      setInt = setInterval(function() {
+        move();
+      }, snake.interval);
+    }
+  }
+  
+  // random 'food'
+  function randomFood() {
+    var randomX = Math.floor(Math.random() * table.rowsCols);
+    var randomY = Math.floor(Math.random() * table.rowsCols);
+    random = randomX + randomY * table.rowsCols;
+    // picks another foodPos if food pops on snake
+    while (boxes[random].classList.contains("snake")) {
+      randomX = Math.floor(Math.random() * table.rowsCols);
+      randomY = Math.floor(Math.random() * table.rowsCols);
+      random = randomX + randomY * table.rowsCols;
+    }  
+    boxes[random].classList.add("food");
+    foodPos = [randomX, randomY];
+  }
+  
+  // read positions and render the snake
+  function renderSnake() {
+    for (var i=0; i<snake.position.length; i++) {
+      boxes[snake.position[i][0] + snake.position[i][1] * table.rowsCols].classList.add("snake");
+    }
+  }
+  
+  // keypress handling to turn
+  function turn(e) {
+    if (snake.canTurn) {
+      switch (e.keyCode) {
+        case 13:
+          // document.removeEventListener()
+          break;
+        case 37:// left
+          if (snake.direction === "right") return;
+          snake.direction = "left";
+          break;
+        case 38:// up
+          if (snake.direction === "down") return;
+          snake.direction = "up";
+          break;
+        case 39:// right
+          if (snake.direction === "left") return;
+          snake.direction = "right";
+          break;
+        case 40:// down
+          if (snake.direction === "up") return;
+          snake.direction = "down";
+          break;
+        default:
+          console.log("wrong key");
+      }
+      snake.canTurn = 0;
+    }
+  }
+  
+  // table creation
+  function tableCreation() {
+    if (snakeTable.innerHTML === "") {
+      // main table
+      for (var i = 0; i<table.boxes; i++) {
+        var divElt = document.createElement("div");
+        divElt.classList.add("box");
+        snakeTable.appendChild(divElt);
+      }
+      // status bar
+      var statusElt = document.createElement("div");
+      statusElt.classList.add("status");
+      snakeTable.appendChild(statusElt);
+      scoreElt = document.createElement("span");
+      scoreElt.classList.add("score");
+      scoreElt.innerHTML = snake.score + " pts";
+      statusElt.appendChild(scoreElt);
+    }
+  }
+  
+  // handle focus of the page
+  // function checkPageFocus() {
+  //   if (document.hasFocus()) {
+  //     modul.classList.remove("hidden");
+  //   }
+  //   else {
+  //     modul.classList.add("hidden");
+  //   }
+  // }
+  // var checkPageInterval = setInterval(checkPageFocus, 300);
